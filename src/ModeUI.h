@@ -13,5 +13,5 @@ namespace ModeUI
     void begin();
     bool mainMenuStep(Mode &selectedMode);
     bool runYesNoDialog();
-    void runToastingFlow();
+    void runToastingFlow(bool tempGuided);
 } // namespace ModeUI

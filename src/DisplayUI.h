@@ -40,6 +40,12 @@ namespace DisplayUI {
   // Toast done screen
   void showToastReady();
 
+  // Place bread prompt; optionally show frozen info and extra percent
+  void showPlaceBread(bool showFrozen, float extraPercent);
+
+  // Calibrating added weight (shows current grams)
+  void showCalibrating(float weightG);
+
   // Yes/No dialog
   void showYesNo(int yesOrNoIndex,
                  const __FlashStringHelper *question = F("Start toasting?"));

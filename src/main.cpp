@@ -21,7 +21,7 @@ void setup()
   sensorsBegin();
 
   DisplayUI::showSplash();
-  delay(2000);
+  delay(3000);
 
   ModeUI::begin();
 }
@@ -32,8 +32,7 @@ void loop()
 
   if (!ModeUI::mainMenuStep(selectedMode))
   {
-    // Still navigating menu
-    sensorsUpdate(); // keep sensors fresh even in menu
+    // Stay in menu; avoid extra work to keep rotary snappy
     return;
   }
 
@@ -41,11 +40,18 @@ void loop()
   {
   case Mode::Toast:
   {
-    bool doToast = ModeUI::runYesNoDialog();
-    if (doToast)
+    // Clear any residual press from the menu selection
+    Input::updateButton();
+    Input::consumeButtonPress();
+    while (Input::isButtonDown())
     {
-      ModeUI::runToastingFlow();
+      delay(2);
+      Input::updateButton();
+      Input::consumeButtonPress();
     }
+
+    bool tempGuided = ModeUI::runYesNoDialog(); // true if jig setup (temp-assisted)
+    ModeUI::runToastingFlow(tempGuided);
     break;
   }
 
@@ -68,7 +74,7 @@ void loop()
         break;
       }
 
-      delay(100);
+      delay(10);
     }
     break;
   }
@@ -83,7 +89,7 @@ void loop()
       {
         break;
       }
-      delay(20);
+      delay(5);
     }
     break;
   }
@@ -91,7 +97,7 @@ void loop()
 
   while (Input::isButtonDown())
   {
-    delay(10);
+    delay(2);
   }
 
   ModeUI::begin();

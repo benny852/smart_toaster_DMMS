@@ -10,6 +10,7 @@ namespace Input
 {
     void begin();
     int getEncoderDelta();
+    void resetEncoder();
     void updateButton();
     bool consumeButtonPress();
     bool isButtonDown();

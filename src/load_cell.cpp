@@ -79,7 +79,7 @@ void LoadCellNAU7802::update()
         _oled->setTextColor(SSD1306_WHITE);
         _oled->setCursor(0, 0);
         _oled->printf("Weight: %.1fg\n", _w_g);
-        _oled->printf("Δ: %.1fg\n", deltaFromBaseline_g());
+        _oled->printf("Delta: %.1fg\n", deltaFromBaseline_g());
         _oled->printf("CPG: %.1f", _cpg);
         _oled->display();
     }
